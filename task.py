@@ -61,6 +61,9 @@ class Matrix:
     def __repr__(self):
         return "\n".join([str(row) for row in self.rows])
 
+    def __iter__(self):
+        return iter(self.rows)
+
 
 if __name__ == '__main__':
     """
