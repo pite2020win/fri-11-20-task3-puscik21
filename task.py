@@ -7,79 +7,6 @@ class Matrix:
         for row in list(*args):
             self.rows.append(row)
 
-    def __add__(self, other):
-        if isinstance(other, Matrix):
-            new_matrix = Matrix()
-            for i in range(len(self.rows)):
-                row = []
-                for j in range(len(self.rows[i])):
-                    row.append(self.rows[i][j] + other.rows[i][j])
-                new_matrix.rows.append(row)
-            return new_matrix
-        elif isinstance(other, int):
-            new_matrix = Matrix()
-            for i in range(len(self.rows)):
-                row = []
-                for j in range(len(self.rows[i])):
-                    row.append(self.rows[i][j] + other)
-                new_matrix.rows.append(row)
-            return new_matrix
-
-    def __radd__(self, other):
-        return self + other
-
-    def __sub__(self, other):
-        if isinstance(other, Matrix):
-            new_matrix = Matrix()
-            for i in range(len(self.rows)):
-                row = []
-                for j in range(len(self.rows[i])):
-                    row.append(self.rows[i][j] - other.rows[i][j])
-                new_matrix.rows.append(row)
-            return new_matrix
-        elif isinstance(other, int):
-            new_matrix = Matrix()
-            for i in range(len(self.rows)):
-                row = []
-                for j in range(len(self.rows[i])):
-                    row.append(self.rows[i][j] - other)
-                new_matrix.rows.append(row)
-            return new_matrix
-
-    def __rsub__(self, other):
-        return self - other
-
-    def __mul__(self, other):
-        if isinstance(other, Matrix):
-            new_matrix = Matrix()
-            for i in range(len(self.rows)):
-                row = []
-                for j in range(len(self.rows[i])):
-                    row.append(self.rows[i][j] * other.rows[i][j])
-                new_matrix.rows.append(row)
-            return new_matrix
-        elif isinstance(other, int):
-            new_matrix = Matrix()
-            for i in range(len(self.rows)):
-                row = []
-                for j in range(len(self.rows[i])):
-                    row.append(self.rows[i][j] * other)
-                new_matrix.rows.append(row)
-            return new_matrix
-
-    def __rmul__(self, other):
-        return self * other
-
-    def __truediv__(self, other):
-        if isinstance(other, int):
-            new_matrix = Matrix()
-            for i in range(len(self.rows)):
-                row = []
-                for j in range(len(self.rows[i])):
-                    row.append(self.rows[i][j] / other)
-                new_matrix.rows.append(row)
-            return new_matrix
-
     def __matmul__(self, other):
         new_matrix = Matrix()
         for i in range(len(self.rows)):
@@ -91,6 +18,45 @@ class Matrix:
                 row.append(mul_sum)
             new_matrix.rows.append(row)
         return new_matrix
+
+    def do_matrix_operation(self, other, func):
+        if isinstance(other, Matrix):
+            new_matrix = Matrix()
+            for i in range(len(self.rows)):
+                row = []
+                for j in range(len(self.rows[i])):
+                    row.append(func(self.rows[i][j], other.rows[i][j]))
+                new_matrix.rows.append(row)
+            return new_matrix
+        elif isinstance(other, int):
+            new_matrix = Matrix()
+            for i in range(len(self.rows)):
+                row = []
+                for j in range(len(self.rows[i])):
+                    row.append(func(self.rows[i][j], other))
+                new_matrix.rows.append(row)
+            return new_matrix
+
+    def __add__(self, other):
+        return self.do_matrix_operation(other, lambda a, b: a + b)
+
+    def __radd__(self, other):
+        return self + other
+
+    def __sub__(self, other):
+        return self.do_matrix_operation(other, lambda a, b: a - b)
+
+    def __rsub__(self, other):
+        return self - other
+
+    def __mul__(self, other):
+        return self.do_matrix_operation(other, lambda a, b: a * b)
+
+    def __rmul__(self, other):
+        return self * other
+
+    def __truediv__(self, other):
+        return self.do_matrix_operation(other, lambda a, b: a / b)
 
     def __repr__(self):
         return "\n".join([str(row) for row in self.rows])
@@ -115,4 +81,3 @@ if __name__ == '__main__':
     #                  [3, 4]])
     # arr1 = arr2 / arr1
     # print_matrix("arr1", arr1)
-
