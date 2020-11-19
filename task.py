@@ -1,6 +1,3 @@
-import numpy as np
-
-
 class Matrix:
     def __init__(self, *args):
         self.rows = []
@@ -19,7 +16,7 @@ class Matrix:
             new_matrix.rows.append(row)
         return new_matrix
 
-    def do_matrix_operation(self, other, func):
+    def do_operation(self, other, func):
         if isinstance(other, Matrix):
             new_matrix = Matrix()
             for i in range(len(self.rows)):
@@ -38,46 +35,35 @@ class Matrix:
             return new_matrix
 
     def __add__(self, other):
-        return self.do_matrix_operation(other, lambda a, b: a + b)
+        return self.do_operation(other, lambda a, b: a + b)
 
     def __radd__(self, other):
         return self + other
 
     def __sub__(self, other):
-        return self.do_matrix_operation(other, lambda a, b: a - b)
+        return self.do_operation(other, lambda a, b: a - b)
 
     def __rsub__(self, other):
-        return self - other
+        return self.do_operation(other, lambda a, b: b - a)
 
     def __mul__(self, other):
-        return self.do_matrix_operation(other, lambda a, b: a * b)
+        return self.do_operation(other, lambda a, b: a * b)
 
     def __rmul__(self, other):
         return self * other
 
     def __truediv__(self, other):
-        return self.do_matrix_operation(other, lambda a, b: a / b)
+        return self.do_operation(other, lambda a, b: a / b)
+
+    def __rtruediv__(self, other):
+        return self.do_operation(other, lambda a, b: b / a)
 
     def __repr__(self):
         return "\n".join([str(row) for row in self.rows])
 
 
-def print_matrix(name, matrix):
-    print("\n*** {} ***\n{}".format(name, matrix))
-
-
 if __name__ == '__main__':
-    matrix1 = Matrix([[1, 2],
-                      [3, 4]])
-    matrix2 = Matrix([[2, 4],
-                      [6, 8]])
-
-    matrix3 = 10 - matrix1
-    print_matrix("matrix3", matrix3)
-
-    # arr1 = np.array([[1, 2],
-    #                  [3, 4]])
-    # arr2 = np.array([[1, 2],
-    #                  [3, 4]])
-    # arr1 = arr2 / arr1
-    # print_matrix("arr1", arr1)
+    """
+    Actually now I put use(test) cases in other file ;)
+    """
+    pass

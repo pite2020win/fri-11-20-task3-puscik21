@@ -40,11 +40,11 @@ class TaskTest(unittest.TestCase):
         np_res = self.np_matrix1 - number
         self.assertCountEqual(res.rows, np_res.tolist())
 
-    # def test_sub_number_rev(self):
-    #     number = np.random.randint(10)
-    #     res = number - self.matrix1
-    #     np_res = number - self.np_matrix1
-    #     self.assertCountEqual(res.rows, np_res.tolist())
+    def test_sub_number_rev(self):
+        number = np.random.randint(10)
+        res = number - self.matrix1
+        np_res = number - self.np_matrix1
+        self.assertCountEqual(res.rows, np_res.tolist())
 
     def test_mul_matrix(self):
         res = self.matrix1 * self.matrix2
@@ -63,10 +63,10 @@ class TaskTest(unittest.TestCase):
         np_res = number * self.np_matrix1
         self.assertCountEqual(res.rows, np_res.tolist())
 
-    # def test_div_matrix(self):
-    #     res = self.matrix1 / self.matrix2
-    #     np_res = self.np_matrix1 / self.np_matrix2
-    #     self.assertCountEqual(res.rows, np_res.tolist())
+    def test_div_matrix(self):
+        res = self.matrix1 / self.matrix2
+        np_res = self.np_matrix1 / self.np_matrix2
+        self.assertCountEqual(res.rows, np_res.tolist())
 
     def test_div_number(self):
         number = np.random.randint(1, 10)
@@ -74,11 +74,11 @@ class TaskTest(unittest.TestCase):
         np_res = self.np_matrix1 / number
         self.assertCountEqual(res.rows, np_res.tolist())
 
-    # def test_div_number_rev(self):
-    #     number = np.random.randint(10)
-    #     res = number / self.matrix1
-    #     np_res = number / self.np_matrix1
-    #     self.assertCountEqual(res.rows, np_res.tolist())
+    def test_div_number_rev(self):
+        number = np.random.randint(10)
+        res = number / self.matrix1
+        np_res = number / self.np_matrix1
+        self.assertCountEqual(res.rows, np_res.tolist())
 
     def test_mat_mul(self):
         res = self.matrix1 @ self.matrix2
